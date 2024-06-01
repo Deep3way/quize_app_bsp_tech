@@ -12,12 +12,8 @@ import 'package:quize_app_bsp_tech/widgets/primary_button.dart';
 class ResultScreen extends StatelessWidget {
   final QuestionController questionController = Get.find();
 
-  const ResultScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    // int scoreGained = questionController.score.value * 30; 
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -32,7 +28,7 @@ class ResultScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: const Icon(Icons.close)),
-                      const HSpace(20)
+                      HSpace(20)
         ],
       ),
       backgroundColor: ColorName.background,
@@ -43,14 +39,14 @@ class ResultScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(eImageAssets.gift,height: 140), 
-           const VSpace(20),
+           VSpace(20),
             Text(
               "Results of Fantasy Quiz",
               style: AppCss.montserrat20MediumBlack
             ),
-            const VSpace(30),
+            VSpace(30),
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -68,19 +64,19 @@ class ResultScreen extends StatelessWidget {
                       ),
                       child: 
                       Image.asset(eImageAssets.money)), 
-                      const HSpace(10),
+                      HSpace(10),
                       Text(
                         "SCORE GAINED",
                          style: AppCss.montserrat18BoldBlack
                       ),
-                      const Spacer(),
+                      Spacer(),
                       Text(
                         questionController.score.value.toString(),
                         style: AppCss.montserrat18BoldBlack
                       ),
                     ],
                   ),
-                  const Divider(color: ColorName.gray,thickness: 0.5,),
+                  Divider(color: ColorName.gray,thickness: 0.5,),
                   Row(
                     children: [
                     
@@ -93,12 +89,12 @@ class ResultScreen extends StatelessWidget {
                                     ),
                                     child: const Icon(Icons.check,
                                         color: ColorName.green)),
-                     const HSpace(10),
+                     HSpace(10),
                       Text(
                         "CORRECT PREDICTIONS",
                         style: AppCss.montserrat18BoldBlack
                       ),
-                      const Spacer(),
+                      Spacer(),
                       Text(
                         questionController.correctPredictions.value.toString(),
                         style: AppCss.montserrat18BoldBlack
@@ -108,7 +104,7 @@ class ResultScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Spacer(),
+            Spacer(),
             PrimaryButton(buttonText: 'OKAY',
             isColors: true,
             Colors: ColorName.green,
