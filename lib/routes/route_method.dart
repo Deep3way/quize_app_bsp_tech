@@ -11,6 +11,6 @@ class AppRoute {
   final List<GetPage> getPages = [
     GetPage(name: _routeName.splashScreen, page: () => const SplashScreen()),
     GetPage(name: _routeName.quizScreen, page: () =>  const QuizScreen()), 
-    GetPage(name: _routeName.resultScreen, page: () =>   ResultScreen()), 
+    GetPage(name: _routeName.resultScreen, page: () =>    ResultScreen()), 
   ];
 }

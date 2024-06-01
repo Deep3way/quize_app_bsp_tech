@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quize_app_bsp_tech/models/question_model.dart';
 import 'package:quize_app_bsp_tech/routes/index.dart';
-import 'package:quize_app_bsp_tech/screen/splash/quize_screens/result_screen.dart';
 import 'package:quize_app_bsp_tech/services/question_services.dart';
 import 'package:quize_app_bsp_tech/widgets/custom_snackbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class QuestionController extends GetxController {
   var loading = false.obs;
@@ -16,6 +16,7 @@ class QuestionController extends GetxController {
   var selectedOption = ''.obs;
   var isLastQuestion = false.obs;
    var correctPredictions = 0.obs;
+  var totalScore = 0.obs;
 
   getQuestions() async {
     try {
@@ -54,17 +55,30 @@ class QuestionController extends GetxController {
     if (selectedOption.value == correctAnswer) {
       score += 30; // Example score increment
       correctPredictions++;
-      print('Score'+score.toString());
+      print('Score$score');
     }
   }
 
-  void nextQuestion() {
+  Future<void> nextQuestion() async {
     if (currentQuestionIndex.value < questionModel.value.dATA!.questions!.length - 1) {
       currentQuestionIndex++;
       selectedOption.value = '';
     } else {
 // isLastQuestion.value = true;
+  await saveScore();
       Get.toNamed(routeName.resultScreen);
     }
+  }
+    Future<void> saveScore() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('score', score.value);
+     debugPrint('Score Stored in local');
+  }
+
+  Future<void> loadScore() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    score.value = prefs.getInt('score') ?? 0;
+    totalScore.value = score.value;
+    debugPrint('object:${prefs.getInt('score')}');
   }
 }

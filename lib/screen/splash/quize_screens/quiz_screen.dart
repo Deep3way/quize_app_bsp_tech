@@ -1,7 +1,5 @@
 // views/quiz_screen.dart
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:quize_app_bsp_tech/common/assets/index.dart';
 import 'package:quize_app_bsp_tech/common/extension/spacing.dart';
@@ -23,6 +21,7 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     questionController.getQuestions();
+   questionController.loadScore();
     super.initState();
   }
 
@@ -90,7 +89,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             width: 20,
                           ),
                           const HSpace(5),
-                          Text("200", style: AppCss.montserrat18BoldBlack),
+                          Text(questionController.totalScore.value.toString(), style: AppCss.montserrat18BoldBlack),
                         ],
                       ),
                     ),
