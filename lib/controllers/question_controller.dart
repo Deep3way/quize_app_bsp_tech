@@ -1,4 +1,4 @@
-import 'dart:convert';  // Add this import for json.decode
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,22 +7,23 @@ import 'package:quize_app_bsp_tech/routes/index.dart';
 import 'package:quize_app_bsp_tech/services/question_services.dart';
 import 'package:quize_app_bsp_tech/widgets/custom_snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vibration/vibration.dart';
 
 class QuestionController extends GetxController {
   var loading = false.obs;
   var questionModel = QuestionsModel().obs;
-   var currentQuestionIndex = 0.obs;
+  var currentQuestionIndex = 0.obs;
   var score = 0.obs;
   var selectedOption = ''.obs;
   var isLastQuestion = false.obs;
-   var correctPredictions = 0.obs;
+  var correctPredictions = 0.obs;
   var totalScore = 0.obs;
 
   getQuestions() async {
     try {
       loading.value = true;
       var res = await QuestionServices.getQuestions();
-      print("Controller Response: $res");
+    debugPrint("Controller Response: $res");
       if (res is String) {
         res = json.decode(res);
       }
@@ -49,30 +50,34 @@ class QuestionController extends GetxController {
   }
 
   void checkAnswer() {
-    var correctAnswer = questionModel.value.dATA!.questions![currentQuestionIndex.value].answer;
-    print(correctAnswer);
-    print(selectedOption);
+    var correctAnswer =
+        questionModel.value.dATA!.questions![currentQuestionIndex.value].answer;
+    debugPrint(correctAnswer);
+    debugPrint(selectedOption.toString());
     if (selectedOption.value == correctAnswer) {
       score += 30; // Example score increment
       correctPredictions++;
-      print('Score$score');
+      debugPrint('Score$score');
     }
   }
 
   Future<void> nextQuestion() async {
-    if (currentQuestionIndex.value < questionModel.value.dATA!.questions!.length - 1) {
+    if (currentQuestionIndex.value <
+        questionModel.value.dATA!.questions!.length - 1) {
       currentQuestionIndex++;
       selectedOption.value = '';
     } else {
 // isLastQuestion.value = true;
-  await saveScore();
+      await saveScore();
+      Vibration.vibrate();
       Get.toNamed(routeName.resultScreen);
     }
   }
-    Future<void> saveScore() async {
+
+  Future<void> saveScore() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('score', score.value);
-     debugPrint('Score Stored in local');
+    debugPrint('Score Stored in local');
   }
 
   Future<void> loadScore() async {

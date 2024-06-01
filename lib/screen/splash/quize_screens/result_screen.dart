@@ -28,7 +28,7 @@ class ResultScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: const Icon(Icons.close)),
-                      HSpace(20)
+                    const  HSpace(20)
         ],
       ),
       backgroundColor: ColorName.background,
@@ -39,14 +39,14 @@ class ResultScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(eImageAssets.gift,height: 140), 
-           VSpace(20),
+          const VSpace(20),
             Text(
               "Results of Fantasy Quiz",
               style: AppCss.montserrat20MediumBlack
             ),
-            VSpace(30),
+          const  VSpace(30),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -59,24 +59,27 @@ class ResultScreen extends StatelessWidget {
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: ColorName.optionBAckgroundColor,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: 
-                      Image.asset(eImageAssets.money)), 
-                      HSpace(10),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(eImageAssets.money),
+                      )), 
+                     const HSpace(10),
                       Text(
                         "SCORE GAINED",
                          style: AppCss.montserrat18BoldBlack
                       ),
-                      Spacer(),
+                     const Spacer(),
                       Text(
                         questionController.score.value.toString(),
                         style: AppCss.montserrat18BoldBlack
                       ),
                     ],
                   ),
-                  Divider(color: ColorName.gray,thickness: 0.5,),
+                 const Divider(color: ColorName.gray,thickness: 0.5,),
                   Row(
                     children: [
                     
@@ -89,12 +92,12 @@ class ResultScreen extends StatelessWidget {
                                     ),
                                     child: const Icon(Icons.check,
                                         color: ColorName.green)),
-                     HSpace(10),
+                    const HSpace(10),
                       Text(
                         "CORRECT PREDICTIONS",
                         style: AppCss.montserrat18BoldBlack
                       ),
-                      Spacer(),
+                    const  Spacer(),
                       Text(
                         questionController.correctPredictions.value.toString(),
                         style: AppCss.montserrat18BoldBlack
@@ -104,7 +107,7 @@ class ResultScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+           const Spacer(),
             PrimaryButton(buttonText: 'OKAY',
             isColors: true,
             Colors: ColorName.green,

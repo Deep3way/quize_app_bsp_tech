@@ -1,4 +1,3 @@
-// views/quiz_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quize_app_bsp_tech/common/assets/index.dart';
@@ -8,6 +7,7 @@ import 'package:quize_app_bsp_tech/common/theme/colors.dart';
 import 'package:quize_app_bsp_tech/controllers/question_controller.dart';
 import 'package:quize_app_bsp_tech/widgets/custom_snackbar.dart';
 import 'package:quize_app_bsp_tech/widgets/primary_button.dart';
+import 'package:vibration/vibration.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -224,8 +224,10 @@ class _QuizScreenState extends State<QuizScreen> {
                   if (questionController.selectedOption.value != '') {
                     questionController.checkAnswer();
                     questionController.nextQuestion();
+
                   } else {
                     CustomSnackBar().errorSnackBar('Please Select an option');
+                    Vibration.vibrate();
                   }
                 },
                 isColors: true,
